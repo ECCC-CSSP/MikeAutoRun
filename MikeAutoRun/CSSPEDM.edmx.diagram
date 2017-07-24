@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="816d85cb2c35499683c719b7c128ab5e" Name="Diagram1">
+        <EntityTypeShape EntityType="CSSPModel.AppTask" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSSPModel.CSSPFile" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSSPModel.CSSPItem" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSSPModel.MikeScenarioFile" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSSPModel.MikeScenario" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="CSSPModel.FK_AppTasks_CSSPItems" ManuallyRouted="false" />
+        <AssociationConnector Association="CSSPModel.FK_MikeScenarioFiles_CSSPFiles" ManuallyRouted="false" />
+        <AssociationConnector Association="CSSPModel.FK_MikeScenarios_CSSPItems" ManuallyRouted="false" />
+        <AssociationConnector Association="CSSPModel.FK_MikeScenarioFiles_MikeScenarios" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

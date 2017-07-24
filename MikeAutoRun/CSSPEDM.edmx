@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CSSPModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="CSSPModelStoreContainer">
+          <EntitySet Name="AppTasks" EntityType="CSSPModel.Store.AppTasks" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CSSPFiles" EntityType="CSSPModel.Store.CSSPFiles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CSSPItems" EntityType="CSSPModel.Store.CSSPItems" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MikeScenarioFiles" EntityType="CSSPModel.Store.MikeScenarioFiles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MikeScenarios" EntityType="CSSPModel.Store.MikeScenarios" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_AppTasks_CSSPItems" Association="CSSPModel.Store.FK_AppTasks_CSSPItems">
+            <End Role="CSSPItems" EntitySet="CSSPItems" />
+            <End Role="AppTasks" EntitySet="AppTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MikeScenarioFiles_CSSPFiles" Association="CSSPModel.Store.FK_MikeScenarioFiles_CSSPFiles">
+            <End Role="CSSPFiles" EntitySet="CSSPFiles" />
+            <End Role="MikeScenarioFiles" EntitySet="MikeScenarioFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MikeScenarioFiles_MikeScenarios" Association="CSSPModel.Store.FK_MikeScenarioFiles_MikeScenarios">
+            <End Role="MikeScenarios" EntitySet="MikeScenarios" />
+            <End Role="MikeScenarioFiles" EntitySet="MikeScenarioFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MikeScenarios_CSSPItems" Association="CSSPModel.Store.FK_MikeScenarios_CSSPItems">
+            <End Role="CSSPItems" EntitySet="CSSPItems" />
+            <End Role="MikeScenarios" EntitySet="MikeScenarios" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AppTasks">
+          <Key>
+            <PropertyRef Name="AppTaskID" />
+          </Key>
+          <Property Name="AppTaskID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AppUserInfoID" Type="int" />
+          <Property Name="CSSPItemID" Type="int" />
+          <Property Name="AppTaskBusyInfo" Type="nvarchar" MaxLength="255" />
+          <Property Name="AppTaskStatus" Type="nvarchar" MaxLength="255" />
+          <Property Name="StartDateTime" Type="datetime" />
+          <Property Name="EndDateTime" Type="datetime" />
+          <Property Name="AppTaskEstimatedLengthInMinutes" Type="float" />
+          <Property Name="AppTaskRemainingTimeInMinutes" Type="float" />
+          <Property Name="AppTaskError" Type="nvarchar" MaxLength="255" />
+          <Property Name="AppTaskCultureName" Type="nvarchar" MaxLength="5" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="ModifiedByID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="CSSPFiles">
+          <Key>
+            <PropertyRef Name="CSSPFileID" />
+          </Key>
+          <Property Name="CSSPFileID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Purpose" Type="nvarchar" MaxLength="50" />
+          <Property Name="FileOriginalPath" Type="nvarchar" MaxLength="250" />
+          <Property Name="FileDescription" Type="text" />
+          <Property Name="FileType" Type="nvarchar" MaxLength="10" />
+          <Property Name="FileSize" Type="bigint" />
+          <Property Name="FileCreatedDate" Type="datetime" />
+          <Property Name="ServerFileName" Type="nvarchar" MaxLength="250" />
+          <Property Name="ServerFilePath" Type="nvarchar" MaxLength="250" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="ModifiedByID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="CSSPItems">
+          <Key>
+            <PropertyRef Name="CSSPItemID" />
+          </Key>
+          <Property Name="CSSPItemID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CSSPItemTypeID" Type="int" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MikeScenarioFiles">
+          <Key>
+            <PropertyRef Name="MikeScenarioFileID" />
+          </Key>
+          <Property Name="MikeScenarioFileID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MikeScenarioID" Type="int" Nullable="false" />
+          <Property Name="CSSPFileID" Type="int" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="ModifiedByID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="MikeScenarios">
+          <Key>
+            <PropertyRef Name="MikeScenarioID" />
+          </Key>
+          <Property Name="MikeScenarioID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CSSPItemID" Type="int" Nullable="false" />
+          <Property Name="ScenarioName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ScenarioStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="ScenarioStartDateAndTime" Type="datetime" />
+          <Property Name="ScenarioEndDateAndTime" Type="datetime" />
+          <Property Name="ScenarioStartExecutionDateAndTime" Type="datetime" />
+          <Property Name="ScenarioExecutionTimeInMinutes" Type="float" />
+          <Property Name="UseWebTide" Type="bit" />
+          <Property Name="NumberOfElements" Type="int" />
+          <Property Name="NumberOfTimeSteps" Type="int" />
+          <Property Name="NumberOfSigmaLayers" Type="int" />
+          <Property Name="NumberOfZLayers" Type="int" />
+          <Property Name="NumberOfHydroOutputParameters" Type="int" />
+          <Property Name="NumberOfTransOutputParameters" Type="int" />
+          <Property Name="EstimatedHydroFileSize" Type="bigint" />
+          <Property Name="EstimatedTransFileSize" Type="bigint" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="ModifiedByID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <Association Name="FK_AppTasks_CSSPItems">
+          <End Role="CSSPItems" Type="CSSPModel.Store.CSSPItems" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AppTasks" Type="CSSPModel.Store.AppTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSSPItems">
+              <PropertyRef Name="CSSPItemID" />
+            </Principal>
+            <Dependent Role="AppTasks">
+              <PropertyRef Name="CSSPItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MikeScenarioFiles_CSSPFiles">
+          <End Role="CSSPFiles" Type="CSSPModel.Store.CSSPFiles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MikeScenarioFiles" Type="CSSPModel.Store.MikeScenarioFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSSPFiles">
+              <PropertyRef Name="CSSPFileID" />
+            </Principal>
+            <Dependent Role="MikeScenarioFiles">
+              <PropertyRef Name="CSSPFileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MikeScenarioFiles_MikeScenarios">
+          <End Role="MikeScenarios" Type="CSSPModel.Store.MikeScenarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MikeScenarioFiles" Type="CSSPModel.Store.MikeScenarioFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MikeScenarios">
+              <PropertyRef Name="MikeScenarioID" />
+            </Principal>
+            <Dependent Role="MikeScenarioFiles">
+              <PropertyRef Name="MikeScenarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MikeScenarios_CSSPItems">
+          <End Role="CSSPItems" Type="CSSPModel.Store.CSSPItems" Multiplicity="1" />
+          <End Role="MikeScenarios" Type="CSSPModel.Store.MikeScenarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSSPItems">
+              <PropertyRef Name="CSSPItemID" />
+            </Principal>
+            <Dependent Role="MikeScenarios">
+              <PropertyRef Name="CSSPItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CSSPModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="CSSPAppDB2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppTasks" EntityType="CSSPModel.AppTask" />
+          <EntitySet Name="CSSPFiles" EntityType="CSSPModel.CSSPFile" />
+          <EntitySet Name="CSSPItems" EntityType="CSSPModel.CSSPItem" />
+          <EntitySet Name="MikeScenarioFiles" EntityType="CSSPModel.MikeScenarioFile" />
+          <EntitySet Name="MikeScenarios" EntityType="CSSPModel.MikeScenario" />
+          <AssociationSet Name="FK_AppTasks_CSSPItems" Association="CSSPModel.FK_AppTasks_CSSPItems">
+            <End Role="CSSPItems" EntitySet="CSSPItems" />
+            <End Role="AppTasks" EntitySet="AppTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MikeScenarioFiles_CSSPFiles" Association="CSSPModel.FK_MikeScenarioFiles_CSSPFiles">
+            <End Role="CSSPFiles" EntitySet="CSSPFiles" />
+            <End Role="MikeScenarioFiles" EntitySet="MikeScenarioFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MikeScenarios_CSSPItems" Association="CSSPModel.FK_MikeScenarios_CSSPItems">
+            <End Role="CSSPItems" EntitySet="CSSPItems" />
+            <End Role="MikeScenarios" EntitySet="MikeScenarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MikeScenarioFiles_MikeScenarios" Association="CSSPModel.FK_MikeScenarioFiles_MikeScenarios">
+            <End Role="MikeScenarios" EntitySet="MikeScenarios" />
+            <End Role="MikeScenarioFiles" EntitySet="MikeScenarioFiles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AppTask">
+          <Key>
+            <PropertyRef Name="AppTaskID" />
+          </Key>
+          <Property Name="AppTaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppUserInfoID" Type="Int32" />
+          <Property Name="CSSPItemID" Type="Int32" />
+          <Property Name="AppTaskBusyInfo" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="AppTaskStatus" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="StartDateTime" Type="DateTime" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Precision="3" />
+          <Property Name="AppTaskEstimatedLengthInMinutes" Type="Double" />
+          <Property Name="AppTaskRemainingTimeInMinutes" Type="Double" />
+          <Property Name="AppTaskError" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="AppTaskCultureName" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedByID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="CSSPItem" Relationship="CSSPModel.FK_AppTasks_CSSPItems" FromRole="AppTasks" ToRole="CSSPItems" />
+        </EntityType>
+        <EntityType Name="CSSPFile">
+          <Key>
+            <PropertyRef Name="CSSPFileID" />
+          </Key>
+          <Property Name="CSSPFileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Purpose" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FileOriginalPath" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="FileDescription" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="FileType" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="FileSize" Type="Int64" />
+          <Property Name="FileCreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ServerFileName" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="ServerFilePath" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedByID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="MikeScenarioFiles" Relationship="CSSPModel.FK_MikeScenarioFiles_CSSPFiles" FromRole="CSSPFiles" ToRole="MikeScenarioFiles" />
+        </EntityType>
+        <EntityType Name="CSSPItem">
+          <Key>
+            <PropertyRef Name="CSSPItemID" />
+          </Key>
+          <Property Name="CSSPItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CSSPItemTypeID" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByID" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AppTasks" Relationship="CSSPModel.FK_AppTasks_CSSPItems" FromRole="CSSPItems" ToRole="AppTasks" />
+          <NavigationProperty Name="MikeScenarios" Relationship="CSSPModel.FK_MikeScenarios_CSSPItems" FromRole="CSSPItems" ToRole="MikeScenarios" />
+        </EntityType>
+        <EntityType Name="MikeScenarioFile">
+          <Key>
+            <PropertyRef Name="MikeScenarioFileID" />
+          </Key>
+          <Property Name="MikeScenarioFileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MikeScenarioID" Type="Int32" Nullable="false" />
+          <Property Name="CSSPFileID" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedByID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="CSSPFile" Relationship="CSSPModel.FK_MikeScenarioFiles_CSSPFiles" FromRole="MikeScenarioFiles" ToRole="CSSPFiles" />
+          <NavigationProperty Name="MikeScenario" Relationship="CSSPModel.FK_MikeScenarioFiles_MikeScenarios" FromRole="MikeScenarioFiles" ToRole="MikeScenarios" />
+        </EntityType>
+        <EntityType Name="MikeScenario">
+          <Key>
+            <PropertyRef Name="MikeScenarioID" />
+          </Key>
+          <Property Name="MikeScenarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CSSPItemID" Type="Int32" Nullable="false" />
+          <Property Name="ScenarioName" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="ScenarioStatus" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ScenarioStartDateAndTime" Type="DateTime" Precision="3" />
+          <Property Name="ScenarioEndDateAndTime" Type="DateTime" Precision="3" />
+          <Property Name="ScenarioStartExecutionDateAndTime" Type="DateTime" Precision="3" />
+          <Property Name="ScenarioExecutionTimeInMinutes" Type="Double" />
+          <Property Name="UseWebTide" Type="Boolean" />
+          <Property Name="NumberOfElements" Type="Int32" />
+          <Property Name="NumberOfTimeSteps" Type="Int32" />
+          <Property Name="NumberOfSigmaLayers" Type="Int32" />
+          <Property Name="NumberOfZLayers" Type="Int32" />
+          <Property Name="NumberOfHydroOutputParameters" Type="Int32" />
+          <Property Name="NumberOfTransOutputParameters" Type="Int32" />
+          <Property Name="EstimatedHydroFileSize" Type="Int64" />
+          <Property Name="EstimatedTransFileSize" Type="Int64" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedByID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="CSSPItem" Relationship="CSSPModel.FK_MikeScenarios_CSSPItems" FromRole="MikeScenarios" ToRole="CSSPItems" />
+          <NavigationProperty Name="MikeScenarioFiles" Relationship="CSSPModel.FK_MikeScenarioFiles_MikeScenarios" FromRole="MikeScenarios" ToRole="MikeScenarioFiles" />
+        </EntityType>
+        <Association Name="FK_AppTasks_CSSPItems">
+          <End Role="CSSPItems" Type="CSSPModel.CSSPItem" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AppTasks" Type="CSSPModel.AppTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSSPItems">
+              <PropertyRef Name="CSSPItemID" />
+            </Principal>
+            <Dependent Role="AppTasks">
+              <PropertyRef Name="CSSPItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MikeScenarioFiles_CSSPFiles">
+          <End Role="CSSPFiles" Type="CSSPModel.CSSPFile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MikeScenarioFiles" Type="CSSPModel.MikeScenarioFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSSPFiles">
+              <PropertyRef Name="CSSPFileID" />
+            </Principal>
+            <Dependent Role="MikeScenarioFiles">
+              <PropertyRef Name="CSSPFileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MikeScenarios_CSSPItems">
+          <End Role="CSSPItems" Type="CSSPModel.CSSPItem" Multiplicity="1" />
+          <End Role="MikeScenarios" Type="CSSPModel.MikeScenario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSSPItems">
+              <PropertyRef Name="CSSPItemID" />
+            </Principal>
+            <Dependent Role="MikeScenarios">
+              <PropertyRef Name="CSSPItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MikeScenarioFiles_MikeScenarios">
+          <End Role="MikeScenarios" Type="CSSPModel.MikeScenario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MikeScenarioFiles" Type="CSSPModel.MikeScenarioFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MikeScenarios">
+              <PropertyRef Name="MikeScenarioID" />
+            </Principal>
+            <Dependent Role="MikeScenarioFiles">
+              <PropertyRef Name="MikeScenarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CSSPModelStoreContainer" CdmEntityContainer="CSSPAppDB2Entities">
+          <EntitySetMapping Name="AppTasks">
+            <EntityTypeMapping TypeName="CSSPModel.AppTask">
+              <MappingFragment StoreEntitySet="AppTasks">
+                <ScalarProperty Name="AppTaskID" ColumnName="AppTaskID" />
+                <ScalarProperty Name="AppUserInfoID" ColumnName="AppUserInfoID" />
+                <ScalarProperty Name="CSSPItemID" ColumnName="CSSPItemID" />
+                <ScalarProperty Name="AppTaskBusyInfo" ColumnName="AppTaskBusyInfo" />
+                <ScalarProperty Name="AppTaskStatus" ColumnName="AppTaskStatus" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+                <ScalarProperty Name="AppTaskEstimatedLengthInMinutes" ColumnName="AppTaskEstimatedLengthInMinutes" />
+                <ScalarProperty Name="AppTaskRemainingTimeInMinutes" ColumnName="AppTaskRemainingTimeInMinutes" />
+                <ScalarProperty Name="AppTaskError" ColumnName="AppTaskError" />
+                <ScalarProperty Name="AppTaskCultureName" ColumnName="AppTaskCultureName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CSSPFiles">
+            <EntityTypeMapping TypeName="CSSPModel.CSSPFile">
+              <MappingFragment StoreEntitySet="CSSPFiles">
+                <ScalarProperty Name="CSSPFileID" ColumnName="CSSPFileID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="FileOriginalPath" ColumnName="FileOriginalPath" />
+                <ScalarProperty Name="FileDescription" ColumnName="FileDescription" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="FileCreatedDate" ColumnName="FileCreatedDate" />
+                <ScalarProperty Name="ServerFileName" ColumnName="ServerFileName" />
+                <ScalarProperty Name="ServerFilePath" ColumnName="ServerFilePath" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CSSPItems">
+            <EntityTypeMapping TypeName="CSSPModel.CSSPItem">
+              <MappingFragment StoreEntitySet="CSSPItems">
+                <ScalarProperty Name="CSSPItemID" ColumnName="CSSPItemID" />
+                <ScalarProperty Name="CSSPItemTypeID" ColumnName="CSSPItemTypeID" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MikeScenarioFiles">
+            <EntityTypeMapping TypeName="CSSPModel.MikeScenarioFile">
+              <MappingFragment StoreEntitySet="MikeScenarioFiles">
+                <ScalarProperty Name="MikeScenarioFileID" ColumnName="MikeScenarioFileID" />
+                <ScalarProperty Name="MikeScenarioID" ColumnName="MikeScenarioID" />
+                <ScalarProperty Name="CSSPFileID" ColumnName="CSSPFileID" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MikeScenarios">
+            <EntityTypeMapping TypeName="CSSPModel.MikeScenario">
+              <MappingFragment StoreEntitySet="MikeScenarios">
+                <ScalarProperty Name="MikeScenarioID" ColumnName="MikeScenarioID" />
+                <ScalarProperty Name="CSSPItemID" ColumnName="CSSPItemID" />
+                <ScalarProperty Name="ScenarioName" ColumnName="ScenarioName" />
+                <ScalarProperty Name="ScenarioStatus" ColumnName="ScenarioStatus" />
+                <ScalarProperty Name="ScenarioStartDateAndTime" ColumnName="ScenarioStartDateAndTime" />
+                <ScalarProperty Name="ScenarioEndDateAndTime" ColumnName="ScenarioEndDateAndTime" />
+                <ScalarProperty Name="ScenarioStartExecutionDateAndTime" ColumnName="ScenarioStartExecutionDateAndTime" />
+                <ScalarProperty Name="ScenarioExecutionTimeInMinutes" ColumnName="ScenarioExecutionTimeInMinutes" />
+                <ScalarProperty Name="UseWebTide" ColumnName="UseWebTide" />
+                <ScalarProperty Name="NumberOfElements" ColumnName="NumberOfElements" />
+                <ScalarProperty Name="NumberOfTimeSteps" ColumnName="NumberOfTimeSteps" />
+                <ScalarProperty Name="NumberOfSigmaLayers" ColumnName="NumberOfSigmaLayers" />
+                <ScalarProperty Name="NumberOfZLayers" ColumnName="NumberOfZLayers" />
+                <ScalarProperty Name="NumberOfHydroOutputParameters" ColumnName="NumberOfHydroOutputParameters" />
+                <ScalarProperty Name="NumberOfTransOutputParameters" ColumnName="NumberOfTransOutputParameters" />
+                <ScalarProperty Name="EstimatedHydroFileSize" ColumnName="EstimatedHydroFileSize" />
+                <ScalarProperty Name="EstimatedTransFileSize" ColumnName="EstimatedTransFileSize" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
